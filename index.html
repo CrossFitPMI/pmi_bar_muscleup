@@ -119,6 +119,79 @@
 
   footer { border-top: 1px solid var(--border); padding: 28px 20px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
   footer a { color: var(--red); text-decoration: none; }
+
+  /* ═══ LEVELS + LOGGING (added) ═══ */
+  :root { color-scheme: dark; }
+  button { font: inherit; color: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .sticky-bar { position: sticky; top: 0; z-index: 200; background: var(--bg); }
+  .sticky-bar .prog-nav { position: static; }
+  .level-bar { padding: 12px 18px 10px; border-bottom: 1px solid var(--border); }
+  .levels { max-width: 660px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .lvl { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 6px 8px; background: var(--card); border: 1px solid var(--border2); border-radius: 4px; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted2); transition: border-color .15s, color .15s, background .15s; }
+  .lvl:hover { border-color: var(--gold-border); color: var(--white); }
+  .lvl[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #000; }
+  .bars { display: inline-flex; gap: 2px; align-items: flex-end; height: 12px; }
+  .bars i { display: block; width: 4px; background: var(--border2); }
+  .bars i:nth-child(1) { height: 5px; } .bars i:nth-child(2) { height: 8px; } .bars i:nth-child(3) { height: 12px; }
+  .bars i.on { background: var(--gold); }
+  .lvl[aria-pressed="true"] .bars i { background: rgba(0,0,0,0.25); }
+  .lvl[aria-pressed="true"] .bars i.on { background: #000; }
+  .hero-pill.goal { border-color: var(--gold-border); color: var(--gold); }
+
+  .placement { display: grid; gap: 4px; }
+  .place { display: grid; grid-template-columns: 128px 1fr; gap: 12px; align-items: baseline; text-align: left; background: transparent; border: 0; border-bottom: 1px dashed var(--border); padding: 10px 0; cursor: pointer; font-size: 15px; color: var(--muted2); line-height: 1.5; }
+  .place:last-child { border-bottom: 0; }
+  .place b { display: flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white); }
+  .place em { font-style: normal; color: var(--light); }
+  .place.current b { color: var(--gold); }
+
+  .day-toggle { width: 100%; border: 0; border-bottom: 1px solid var(--border); text-align: left; }
+  .day-count { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; color: var(--light); white-space: nowrap; }
+  .day-count.done { color: var(--gold); }
+
+  .drill-log { padding-left: 17px; margin-top: 12px; display: grid; gap: 8px; }
+  .log-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .log-key { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--light); }
+  .log-hint { font-size: 12px; color: var(--light); }
+  .set-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .set { display: grid; gap: 4px; justify-items: center; }
+  .set label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--light); }
+  .set input { width: 52px; height: 44px; background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; color: var(--white); text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; -webkit-appearance: none; }
+  .set input::placeholder { color: #8c8c8c; font-weight: 600; }
+  .set input.filled { border-color: var(--gold); background: var(--gold-dim); }
+
+  .others { margin: 10px 0 0 32px; }
+  .others summary { cursor: pointer; list-style: none; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--light); }
+  .others summary::-webkit-details-marker { display: none; }
+  .others summary::before { content: '+ '; color: var(--gold); }
+  .others[open] summary::before { content: '– '; }
+  .alt { display: grid; grid-template-columns: 96px 1fr; gap: 10px; margin-top: 6px; font-size: 14px; align-items: baseline; }
+  .alt-lvl { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted2); }
+  .alt-what { color: var(--muted2); min-width: 0; }
+  .alt-what span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--gold); white-space: nowrap; margin-left: 4px; }
+
+  .day-notes { width: 100%; min-height: 44px; margin-top: 16px; background: var(--bg); border: 1px solid var(--border2); border-radius: 4px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 15px; padding: 10px 12px; resize: vertical; }
+  .day-notes::placeholder { color: #8c8c8c; }
+
+  .clear-btn { margin-top: 16px; background: transparent; border: 1px solid var(--border2); border-radius: 3px; padding: 8px 14px; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); }
+  .clear-btn:hover { border-color: var(--gold-border); color: var(--white); }
+  .clear-btn.armed { background: #c0392b; border-color: #c0392b; color: var(--white); }
+
+  @media (max-width: 380px) {
+    .lvl { font-size: 13px; letter-spacing: 1px; gap: 6px; }
+    .place { grid-template-columns: 112px 1fr; }
+    .drill-log { padding-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+  .day-info { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .day-info .day-tag { margin-top: 6px; }
+  .drill-log { margin-top: 10px; }
+  .finisher-block .drill-log { padding-left: 0; }
+  a.finisher-link { color: var(--light); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; }
+  a.finisher-link:hover { color: var(--red); }
+  .hero-pill.goal { background: transparent; }
 </style>
 </head>
 <body>
@@ -133,26 +206,35 @@
       <span class="line1">Bar Muscle-Up</span>
       <span class="line2">PROGRAMME.</span>
     </div>
-    <p class="hero-desc"><strong>4 weeks</strong> towards your Bar Muscle-Up. 4 sessions per week. Each underlined movement links directly to its video demo. </p>
+    <p class="hero-desc" id="hero-desc"></p>
     <div class="hero-pills">
       <span class="hero-pill red">4 Weeks</span>
       <span class="hero-pill gold">4 Days / Week</span>
-      <span class="hero-pill">CrossFit PMI</span>
+      <span class="hero-pill goal" id="goal-pill"></span>
     </div>
   </div>
 </div>
 
-<nav class="prog-nav">
-  <a href="#" class="active" onclick="showPage('overview',this)">Overview</a>
-  <a href="#" onclick="showPage('week1',this)">Week 1</a>
-  <a href="#" onclick="showPage('week2',this)">Week 2</a>
-  <a href="#" onclick="showPage('week3',this)">Week 3</a>
-  <a href="#" onclick="showPage('week4',this)">Week 4</a>
-</nav>
+<div class="sticky-bar">
+  <div class="level-bar">
+    <div class="levels" role="group" aria-label="Your level" id="levels"></div>
+  </div>
+  <nav class="prog-nav" id="prog-nav">
+    <a href="#" data-page="overview">Overview</a>
+    <a href="#" data-page="week1">Week 1</a>
+    <a href="#" data-page="week2">Week 2</a>
+    <a href="#" data-page="week3">Week 3</a>
+    <a href="#" data-page="week4">Week 4</a>
+  </nav>
+</div>
 
 <!-- OVERVIEW -->
-<div id="overview" class="page active">
+<div id="overview" class="page">
   <div class="section-wrap">
+    <div class="prereq-block">
+      <div class="prereq-title">Choose Your Level</div>
+      <div class="placement" id="placement"></div>
+    </div>
     <div class="prereq-block">
       <div class="prereq-title">About This Programme</div>
       <div class="prereq-body">These are great drills to help you master the Bar Muscle-Up — but depending on where you are starting, it may take a few months or more of solid work to build this skill. As always, use precaution in everything you do. Mats and spotters for safety are necessary.</div>
@@ -176,371 +258,373 @@
     </div>
     <div class="prereq-block">
       <div class="prereq-title">Daily Warmup — Do Before Every Session</div>
-      <div class="warmup-section" style="margin-bottom:0;border:none;background:transparent;padding:0">
-        <div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">Accumulate 1 min</span></div>
-        <div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">Accumulate 1 min</span></div>
-        <div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div>
-        <div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div>
-      </div>
+      <div class="warmup-section" style="margin-bottom:0;border:none;background:transparent;padding:0" id="overview-warmup"></div>
+    </div>
+    <div class="prereq-block">
+      <div class="prereq-title">Logging Your Sessions</div>
+      <div class="prereq-body">Open the week you're on and log your reps (or seconds) for each set or round as you go. Where a drill is done for time or accumulated, log your total. If the same drill came up last week, last week's numbers show faintly in the boxes. Your log saves on this phone, so use the same phone each time.</div>
+      <button class="clear-btn" id="clear-btn" type="button">Clear my log</button>
     </div>
   </div>
 </div>
 
-<!-- WEEK 1 -->
-<div id="week1" class="page">
-  <div class="section-wrap">
-    <div class="week-header"><span class="week-label">Week 1</span><span class="week-divider"></span></div>
-
-    <div class="day-card open">
-      <div class="day-toggle" onclick="toggleDay(this)">
-        <div class="day-num">1</div>
-        <div class="day-info"><div class="day-sub">Week 1</div><div class="day-title">Day 1</div></div>
-        <span class="day-chevron">▾</span>
-      </div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=pdfz5vvXM1k" target="_blank" rel="noopener">Hollow Jump to Support</a></div>
-          <div class="drill-vol">4 min — 30 sec on / 30 sec off</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2c_uXcHQX7E" target="_blank" rel="noopener">Low Bar Muscle Up Drill</a></div>
-          <div class="drill-vol">Rest 1 min, then 3 min — 30 sec on / 30 sec off</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)">
-        <div class="day-num">2</div>
-        <div class="day-info"><div class="day-sub">Week 1</div><div class="day-title">Day 2</div></div>
-        <span class="day-chevron">▾</span>
-      </div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/tIXMGCiemi0" target="_blank" rel="noopener">Hollow Body Pull Downs</a></div>
-          <div class="drill-vol">3 sets × 20 reps</div>
-        </div>
-        <div class="between-label">Between each set ↓</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=F5UGXko-Gqo" target="_blank" rel="noopener">Front Lever Pulls</a></div>
-          <div class="drill-vol">8 reps — banded (challenging but doable)</div>
-          <div class="drill-note">No kipping — strict as possible</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)">
-        <div class="day-num">3</div>
-        <div class="day-info"><div class="day-sub">Week 1</div><div class="day-title">Day 3</div></div>
-        <span class="day-chevron">▾</span>
-      </div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/tIXMGCiemi0" target="_blank" rel="noopener">Hollow Pulldowns</a></div>
-          <div class="drill-vol">30 controlled reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=oFZfSD0ZMfw" target="_blank" rel="noopener">BMU Rolling Pull Downs</a></div>
-          <div class="drill-vol">3 sets × 10 reps</div>
-          <div class="drill-note">Arms stay straight the entire time. Body in hollow position — pull down hard on bar as you come back. Working the 2nd portion of the bar muscle-up.</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=18pVtOJ2RxI" target="_blank" rel="noopener">Kipping Beat Swings</a></div>
-          <div class="drill-vol">4 sets × 10 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)">
-        <div class="day-num">4</div>
-        <div class="day-info"><div class="day-sub">Week 1</div><div class="day-title">Day 4 — Review</div><span class="day-tag tag-review">Review</span></div>
-        <span class="day-chevron">▾</span>
-      </div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/yrIQNppmiKo" target="_blank" rel="noopener">Get Out of Pool (straight arms up &amp; down)</a></div>
-          <div class="drill-vol">5 sets × 5 reps — rest as needed between sets</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=18pVtOJ2RxI" target="_blank" rel="noopener">Beat Swings</a></div>
-          <div class="drill-vol">3 max effort sets</div>
-        </div>
-        <div class="finisher-block">
-          <div class="finisher-label">Finisher</div>
-          <div class="finisher-body"><a href="https://www.youtube.com/watch?v=bEldWrQA-fM" target="_blank" rel="noopener" style="color:var(--light);text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:3px;">Face Pulls &amp; Press</a> — 2 min AMRAP</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- WEEK 2 -->
-<div id="week2" class="page">
-  <div class="section-wrap">
-    <div class="week-header"><span class="week-label">Week 2</span><span class="week-divider"></span></div>
-
-    <div class="day-card open">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">1</div><div class="day-info"><div class="day-sub">Week 2</div><div class="day-title">Day 1</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/stShZoRHIb4" target="_blank" rel="noopener">BMU Pull-Down Hold Drill</a></div>
-          <div class="drill-vol">3 sets × 5 reps — 10 sec hold at top</div>
-        </div>
-        <div class="between-label">Between above sets ↓</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/SGdNwb4VbRs" target="_blank" rel="noopener">BMU Scoop to Hollow Drill</a></div>
-          <div class="drill-vol">15 slow reps (1st drill only)</div>
-          <div class="drill-note">Do the 1st drill only — the rest of the video demos how it relates to a BMU.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">2</div><div class="day-info"><div class="day-sub">Week 2</div><div class="day-title">Day 2</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill-note" style="margin-bottom:14px;margin-left:0">3 rounds — NFT (not for time — for quality)</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/LZfVkXz1QR8" target="_blank" rel="noopener">Arch / Hollow Tension Drill</a></div>
-          <div class="drill-vol">15 reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=RbVYGbISGRA" target="_blank" rel="noopener">Banded 3-Position Muscle-Up Drill</a></div>
-          <div class="drill-vol">5 reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/xf69XHAs5w8" target="_blank" rel="noopener">Overgrip Strict Chest-to-Bar Pull-Ups</a></div>
-          <div class="drill-vol">3–5 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">3</div><div class="day-info"><div class="day-sub">Week 2</div><div class="day-title">Day 3</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=oFZfSD0ZMfw" target="_blank" rel="noopener">Bar Muscle Up Rolling Drill</a></div>
-          <div class="drill-vol">4 min — 15 sec on / 15 sec off</div>
-          <div class="drill-note">Use a frisbee or furniture sliders</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=Dg3GMP3O5Oo" target="_blank" rel="noopener">Straight Arm Block Drill</a></div>
-          <div class="drill-vol">Rest, then 3 min — 15 sec on / 15 sec off</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2xuLHz9bG3E" target="_blank" rel="noopener">3-Position Swing Drill</a></div>
-          <div class="drill-vol">5–8 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">4</div><div class="day-info"><div class="day-sub">Week 2</div><div class="day-title">Day 4 — Review</div><span class="day-tag tag-review">Review</span></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill-note" style="margin-bottom:14px;margin-left:0">Alternate between each — 5 max effort rounds of both</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/stShZoRHIb4" target="_blank" rel="noopener">BMU Pull-Down Hold Drill</a></div>
-          <div class="drill-vol">5 max effort holds</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=RbVYGbISGRA" target="_blank" rel="noopener">Banded 3-Position Muscle-Up Drill</a></div>
-          <div class="drill-vol">5 max effort sets</div>
-        </div>
-        <div class="finisher-block">
-          <div class="finisher-label">Finisher</div>
-          <div class="finisher-body"><a href="https://www.youtube.com/watch?v=bEldWrQA-fM" target="_blank" rel="noopener" style="color:var(--light);text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:3px;">Posterior Shoulder Trio</a> — 2 rounds max reps (RX 5 lb / 2.5 lb)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- WEEK 3 -->
-<div id="week3" class="page">
-  <div class="section-wrap">
-    <div class="week-header"><span class="week-label">Week 3</span><span class="week-divider"></span></div>
-
-    <div class="day-card open">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">1</div><div class="day-info"><div class="day-sub">Week 3</div><div class="day-title">Day 1</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=P1SxiIdUrnw" target="_blank" rel="noopener">Banded Hollow Pulldowns</a></div>
-          <div class="drill-vol">20 – 15 – 10 – 5 reps (descending sets)</div>
-        </div>
-        <div class="between-label">Between each set ↓</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2xuLHz9bG3E" target="_blank" rel="noopener">3-Position Swing Drill</a></div>
-          <div class="drill-vol">5 – 4 – 3 – 2 reps (matching descending sets — accumulate, not necessarily consecutive)</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">2</div><div class="day-info"><div class="day-sub">Week 3</div><div class="day-title">Day 2</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/FiXykFtsge4" target="_blank" rel="noopener">Hollow I-Y-T</a></div>
-          <div class="drill-vol">Warmup — 2 × 10 reps (~5 lb each hand)</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/SGdNwb4VbRs" target="_blank" rel="noopener">BMU Scoop to Hollow Drill</a></div>
-          <div class="drill-vol">Accumulate 40 reps (1st drill only)</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=DlpuK-T1rzc" target="_blank" rel="noopener">Banded Bar Muscle-Up</a></div>
-          <div class="drill-vol">Accumulate / attempt 10–15 quality reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">3</div><div class="day-info"><div class="day-sub">Week 3</div><div class="day-title">Day 3</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill-note" style="margin-bottom:14px;margin-left:0">3 sets — rest 30 sec to 1 min between sets</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=F5UGXko-Gqo" target="_blank" rel="noopener">Front Lever Pulls</a></div>
-          <div class="drill-vol">5 reps — banded (choose width you need)</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/yrIQNppmiKo" target="_blank" rel="noopener">Get Out of Pool Drill</a></div>
-          <div class="drill-vol">5 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">4</div><div class="day-info"><div class="day-sub">Week 3</div><div class="day-title">Day 4 — Review</div><span class="day-tag tag-review">Review</span></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/FiXykFtsge4" target="_blank" rel="noopener">Hollow I-Y-T</a></div>
-          <div class="drill-vol">3 rounds — 40 sec work / 20 sec rest (~5 lb each hand)</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2xuLHz9bG3E" target="_blank" rel="noopener">3-Position Swing Drill</a></div>
-          <div class="drill-vol">5 min of practice — video at least one rep to critique yourself</div>
-        </div>
-        <div class="finisher-block">
-          <div class="finisher-label">Finisher</div>
-          <div class="finisher-body"><a href="https://www.youtube.com/watch?v=bEldWrQA-fM" target="_blank" rel="noopener" style="color:var(--light);text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:3px;">Posterior Shoulder Trio</a> — 2 rounds max reps (RX 5 lb / 2.5 lb)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- WEEK 4 -->
-<div id="week4" class="page">
-  <div class="section-wrap">
-    <div class="week-header"><span class="week-label">Week 4 — Final Push</span><span class="week-divider"></span></div>
-
-    <div class="day-card open">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">1</div><div class="day-info"><div class="day-sub">Week 4</div><div class="day-title">Day 1</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill-note" style="margin-bottom:14px;margin-left:0">3 rounds — set up stations before you begin. 1 min per station.</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=oFZfSD0ZMfw" target="_blank" rel="noopener">BMU Rolling Drill</a></div>
-          <div class="drill-vol">Min 1 — 30 reps (straight arms)</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2c_uXcHQX7E" target="_blank" rel="noopener">BMU Support Drill</a></div>
-          <div class="drill-vol">Min 2 — 15 reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/tIXMGCiemi0" target="_blank" rel="noopener">BMU PVC Hollow</a></div>
-          <div class="drill-vol">Min 3 — 15 slow reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">2</div><div class="day-info"><div class="day-sub">Week 4</div><div class="day-title">Day 2</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/pdfz5vvXM1k" target="_blank" rel="noopener">Hollow Slider Bench</a></div>
-          <div class="drill-vol">20 – 15 – 10 reps (working straight arm pull)</div>
-        </div>
-        <div class="between-label">Between each set ↓</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/Ml7gzy-H3As" target="_blank" rel="noopener">BMU Negatives</a></div>
-          <div class="drill-vol">3 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">3</div><div class="day-info"><div class="day-sub">Week 4</div><div class="day-title">Day 3</div></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill-note" style="margin-bottom:14px;margin-left:0">Alternate between — 5-4-3-2-1 of each</div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/xf69XHAs5w8" target="_blank" rel="noopener">Overgrip (knuckles to ceiling) Strict CTB Pull-Ups</a></div>
-          <div class="drill-vol">5 – 4 – 3 – 2 – 1 reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/shorts/yrIQNppmiKo" target="_blank" rel="noopener">Get Out of Pool Drill</a></div>
-          <div class="drill-vol">5 – 4 – 3 – 2 – 1 reps</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-toggle" onclick="toggleDay(this)"><div class="day-num">4</div><div class="day-info"><div class="day-sub">Week 4</div><div class="day-title">Day 4 — Attempt It!</div><span class="day-tag tag-review">Final</span></div><span class="day-chevron">▾</span></div>
-      <div class="day-body">
-        <div class="warmup-section"><div class="warmup-title">Daily Warmup</div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=53fFonuQw4U" target="_blank" rel="noopener">Hollow Hold</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://youtu.be/EKbtoTL7lkI" target="_blank" rel="noopener">Overhead Opener</a><span class="warmup-vol">1 min</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/watch?v=UsHRhS9w1n4" target="_blank" rel="noopener">Prone PVC Raises</a><span class="warmup-vol">2 × 10</span></div><div class="warmup-item"><a class="warmup-link" href="https://www.youtube.com/shorts/5O5ZI45Imek" target="_blank" rel="noopener">Hollow Pulldowns</a><span class="warmup-vol">2 × 20</span></div></div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://www.youtube.com/watch?v=2xuLHz9bG3E" target="_blank" rel="noopener">3-Position Swing Drill</a></div>
-          <div class="drill-vol">10 reps</div>
-        </div>
-        <div class="drill">
-          <div class="drill-header"><span class="drill-dot"></span><a class="drill-name" href="https://youtu.be/P1SxiIdUrnw" target="_blank" rel="noopener">Full Bar Muscle-Up</a></div>
-          <div class="drill-vol">5 min of attempts</div>
-          <div class="drill-note">Don't rush to the top — hit each position. Continue to pull down and around the bar as hips rise. Video your attempts to review your technique!</div>
-        </div>
-        <div class="finisher-block">
-          <div class="finisher-label">Finisher</div>
-          <div class="finisher-body"><a href="https://www.youtube.com/watch?v=bEldWrQA-fM" target="_blank" rel="noopener" style="color:var(--light);text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:3px;">Face Pulls &amp; Press</a> — 2 min AMRAP</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="weeks"></div>
 
 <footer>
-
   <div style="margin-top:18px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,5vw,34px);font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--white,#fff);line-height:1.1;">
     Stay on the Bar.<br>
     <span style="color:var(--red,#E8231A)">Your Arms Will Follow.</span>
   </div>
   <p style="margin-top:10px;font-family:'Barlow',sans-serif;font-size:13px;color:var(--muted,#888);letter-spacing:1px;">CrossFit PMI · Members Programme</p>
 
-  <a href="mailto:crossfitpmi@gmail.com">crossfitpmi@gmail.com</a> &nbsp;·&nbsp; <a href="http://www.crossfitpmi.com">crossfitpmi.com</a>
+  <a href="mailto:info@crossfitpmi.com">info@crossfitpmi.com</a> &nbsp;·&nbsp; <a href="http://www.crossfitpmi.com">crossfitpmi.com</a>
 </footer>
 
 <script>
-  function showPage(id, el) {
-    event.preventDefault();
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.prog-nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    el.classList.add('active');
-    window.scrollTo(0,0);
+/* ═════════════════════════════════════════════════════════════
+   PROGRAMME DATA — edit sessions here.
+   Each level has 4 weeks × 4 days. A drill looks like:
+     { name, video, vol, note, between, log: [boxes, 'Set'|'Rnd'|'Total'|'Made', 'reps'|'sec'|'kg'] }
+   - vol      what to do (shown under the name)
+   - between  true = "Between each set ↓" shows above this drill
+   - log      how many log boxes, what each box is called, and what they log
+   Day:  { title, tag, intro, drills: [...], finisher: { name, video, vol, log } }
+   Any value can differ by week: { 1: ..., 2: ..., 3: ..., 4: ... }
+   ═════════════════════════════════════════════════════════════ */
+const WARMUP = [
+  { name: 'Hollow Hold',      video: 'https://www.youtube.com/watch?v=53fFonuQw4U', vol: '1 min', ovVol: 'Accumulate 1 min' },
+  { name: 'Overhead Opener',  video: 'https://youtu.be/EKbtoTL7lkI',                 vol: '1 min', ovVol: 'Accumulate 1 min' },
+  { name: 'Prone PVC Raises', video: 'https://www.youtube.com/watch?v=UsHRhS9w1n4',  vol: '2 × 10' },
+  { name: 'Hollow Pulldowns', video: 'https://www.youtube.com/shorts/5O5ZI45Imek',   vol: '2 × 20' }
+];
+
+const V = {
+  hollowJump:   'https://www.youtube.com/watch?v=pdfz5vvXM1k',
+  hollowSlider: 'https://youtu.be/pdfz5vvXM1k',
+  lowBar:       'https://www.youtube.com/watch?v=2c_uXcHQX7E',
+  hollowPull:   'https://www.youtube.com/shorts/tIXMGCiemi0',
+  frontLever:   'https://www.youtube.com/watch?v=F5UGXko-Gqo',
+  rolling:      'https://www.youtube.com/watch?v=oFZfSD0ZMfw',
+  beatSwing:    'https://www.youtube.com/watch?v=18pVtOJ2RxI',
+  pool:         'https://www.youtube.com/shorts/yrIQNppmiKo',
+  facePulls:    'https://www.youtube.com/watch?v=bEldWrQA-fM',
+  pdHold:       'https://www.youtube.com/shorts/stShZoRHIb4',
+  scoop:        'https://youtu.be/SGdNwb4VbRs',
+  archHollow:   'https://youtu.be/LZfVkXz1QR8',
+  banded3pos:   'https://www.youtube.com/watch?v=RbVYGbISGRA',
+  strictC2B:    'https://youtu.be/xf69XHAs5w8',
+  blockDrill:   'https://www.youtube.com/watch?v=Dg3GMP3O5Oo',
+  swing3pos:    'https://www.youtube.com/watch?v=2xuLHz9bG3E',
+  bandedHollow: 'https://www.youtube.com/watch?v=P1SxiIdUrnw',
+  iyt:          'https://www.youtube.com/shorts/FiXykFtsge4',
+  bandedBMU:    'https://www.youtube.com/watch?v=DlpuK-T1rzc',
+  negatives:    'https://www.youtube.com/shorts/Ml7gzy-H3As',
+  fullBMU:      'https://youtu.be/P1SxiIdUrnw',
+  kipC2B:       'https://www.youtube.com/watch?v=AyPTCEXTjOo'
+};
+
+const LEVELS = [
+  { id: 'beginner', name: 'Beginner', bars: 1,
+    goal: 'First Bar Muscle-Up',
+    who: 'You meet the pre-requisites but don’t have a bar muscle-up yet.',
+    desc: '<strong>4 weeks</strong> towards <strong>your first Bar Muscle-Up</strong>. 4 sessions per week. Each underlined movement links directly to its video demo.' },
+  { id: 'intermediate', name: 'Intermediate', bars: 2,
+    goal: 'Consistent Reps',
+    who: 'You have 1–3 bar muscle-ups but they’re hit and miss, or you can’t link them.',
+    desc: '<strong>4 weeks</strong> to make your bar muscle-up <strong>consistent</strong> — reliable singles, then linked doubles. 4 sessions per week. Each underlined movement links directly to its video demo.' },
+  { id: 'rx', name: 'RX', bars: 3,
+    goal: 'Bar Muscle-Up Mastery',
+    who: 'You can do 3+ bar muscle-ups unbroken and want bigger sets.',
+    desc: '<strong>4 weeks</strong> for <strong>bar muscle-up mastery</strong> — unbroken sets, strict strength and reps that hold up under fatigue. 4 sessions per week. Each underlined movement links directly to its video demo.' }
+];
+
+const PROGRAMME = {
+  /* ── BEGINNER: the original PMI programme ── */
+  beginner: [
+    /* Week 1 */
+    [ { title: 'Day 1', drills: [
+          { name: 'Hollow Jump to Support', video: V.hollowJump, vol: '4 min — 30 sec on / 30 sec off', log: [1, 'Total', 'reps'] },
+          { name: 'Low Bar Muscle Up Drill', video: V.lowBar, vol: 'Rest 1 min, then 3 min — 30 sec on / 30 sec off', log: [1, 'Total', 'reps'] } ] },
+      { title: 'Day 2', drills: [
+          { name: 'Hollow Body Pull Downs', video: V.hollowPull, vol: '3 sets × 20 reps', log: [3, 'Set', 'reps'] },
+          { name: 'Front Lever Pulls', video: V.frontLever, vol: '8 reps — banded (challenging but doable)', note: 'No kipping — strict as possible', between: true, log: [3, 'Set', 'reps'] } ] },
+      { title: 'Day 3', drills: [
+          { name: 'Hollow Pulldowns', video: V.hollowPull, vol: '30 controlled reps', log: [1, 'Total', 'reps'] },
+          { name: 'BMU Rolling Pull Downs', video: V.rolling, vol: '3 sets × 10 reps', note: 'Arms stay straight the entire time. Body in hollow position — pull down hard on bar as you come back. Working the 2nd portion of the bar muscle-up.', log: [3, 'Set', 'reps'] },
+          { name: 'Kipping Beat Swings', video: V.beatSwing, vol: '4 sets × 10 reps', log: [4, 'Set', 'reps'] } ] },
+      { title: 'Day 4 — Review', tag: 'Review', drills: [
+          { name: 'Get Out of Pool (straight arms up & down)', video: V.pool, vol: '5 sets × 5 reps — rest as needed between sets', log: [5, 'Set', 'reps'] },
+          { name: 'Beat Swings', video: V.beatSwing, vol: '3 max effort sets', log: [3, 'Set', 'reps'] } ],
+        finisher: { name: 'Face Pulls & Press', video: V.facePulls, vol: '2 min AMRAP', log: [1, 'Total', 'reps'] } } ],
+    /* Week 2 */
+    [ { title: 'Day 1', drills: [
+          { name: 'BMU Pull-Down Hold Drill', video: V.pdHold, vol: '3 sets × 5 reps — 10 sec hold at top', log: [3, 'Set', 'reps'] },
+          { name: 'BMU Scoop to Hollow Drill', video: V.scoop, vol: '15 slow reps (1st drill only)', note: 'Do the 1st drill only — the rest of the video demos how it relates to a BMU.', between: 'Between above sets ↓', log: [3, 'Set', 'reps'] } ] },
+      { title: 'Day 2', intro: '3 rounds — NFT (not for time — for quality)', drills: [
+          { name: 'Arch / Hollow Tension Drill', video: V.archHollow, vol: '15 reps', log: [3, 'Rnd', 'reps'] },
+          { name: 'Banded 3-Position Muscle-Up Drill', video: V.banded3pos, vol: '5 reps', log: [3, 'Rnd', 'reps'] },
+          { name: 'Overgrip Strict Chest-to-Bar Pull-Ups', video: V.strictC2B, vol: '3–5 reps', log: [3, 'Rnd', 'reps'] } ] },
+      { title: 'Day 3', drills: [
+          { name: 'Bar Muscle Up Rolling Drill', video: V.rolling, vol: '4 min — 15 sec on / 15 sec off', note: 'Use a frisbee or furniture sliders', log: [1, 'Total', 'reps'] },
+          { name: 'Straight Arm Block Drill', video: V.blockDrill, vol: 'Rest, then 3 min — 15 sec on / 15 sec off', log: [1, 'Total', 'reps'] },
+          { name: '3-Position Swing Drill', video: V.swing3pos, vol: '5–8 reps', log: [1, 'Total', 'reps'] } ] },
+      { title: 'Day 4 — Review', tag: 'Review', intro: 'Alternate between each — 5 max effort rounds of both', drills: [
+          { name: 'BMU Pull-Down Hold Drill', video: V.pdHold, vol: '5 max effort holds', log: [5, 'Rnd', 'sec'] },
+          { name: 'Banded 3-Position Muscle-Up Drill', video: V.banded3pos, vol: '5 max effort sets', log: [5, 'Rnd', 'reps'] } ],
+        finisher: { name: 'Posterior Shoulder Trio', video: V.facePulls, vol: '2 rounds max reps (RX 5 lb / 2.5 lb)', log: [2, 'Rnd', 'reps'] } } ],
+    /* Week 3 */
+    [ { title: 'Day 1', drills: [
+          { name: 'Banded Hollow Pulldowns', video: V.bandedHollow, vol: '20 – 15 – 10 – 5 reps (descending sets)', log: [4, 'Set', 'reps'] },
+          { name: '3-Position Swing Drill', video: V.swing3pos, vol: '5 – 4 – 3 – 2 reps (matching descending sets — accumulate, not necessarily consecutive)', between: true, log: [4, 'Set', 'reps'] } ] },
+      { title: 'Day 2', drills: [
+          { name: 'Hollow I-Y-T', video: V.iyt, vol: 'Warmup — 2 × 10 reps (~5 lb each hand)', log: [2, 'Set', 'reps'] },
+          { name: 'BMU Scoop to Hollow Drill', video: V.scoop, vol: 'Accumulate 40 reps (1st drill only)', log: [1, 'Total', 'reps'] },
+          { name: 'Banded Bar Muscle-Up', video: V.bandedBMU, vol: 'Accumulate / attempt 10–15 quality reps', log: [1, 'Total', 'reps'] } ] },
+      { title: 'Day 3', intro: '3 sets — rest 30 sec to 1 min between sets', drills: [
+          { name: 'Front Lever Pulls', video: V.frontLever, vol: '5 reps — banded (choose width you need)', log: [3, 'Set', 'reps'] },
+          { name: 'Get Out of Pool Drill', video: V.pool, vol: '5 reps', log: [3, 'Set', 'reps'] } ] },
+      { title: 'Day 4 — Review', tag: 'Review', drills: [
+          { name: 'Hollow I-Y-T', video: V.iyt, vol: '3 rounds — 40 sec work / 20 sec rest (~5 lb each hand)', log: [3, 'Rnd', 'reps'] },
+          { name: '3-Position Swing Drill', video: V.swing3pos, vol: '5 min of practice — video at least one rep to critique yourself', log: [1, 'Total', 'reps'] } ],
+        finisher: { name: 'Posterior Shoulder Trio', video: V.facePulls, vol: '2 rounds max reps (RX 5 lb / 2.5 lb)', log: [2, 'Rnd', 'reps'] } } ],
+    /* Week 4 */
+    [ { title: 'Day 1', intro: '3 rounds — set up stations before you begin. 1 min per station.', drills: [
+          { name: 'BMU Rolling Drill', video: V.rolling, vol: 'Min 1 — 30 reps (straight arms)', log: [3, 'Rnd', 'reps'] },
+          { name: 'BMU Support Drill', video: V.lowBar, vol: 'Min 2 — 15 reps', log: [3, 'Rnd', 'reps'] },
+          { name: 'BMU PVC Hollow', video: V.hollowPull, vol: 'Min 3 — 15 slow reps', log: [3, 'Rnd', 'reps'] } ] },
+      { title: 'Day 2', drills: [
+          { name: 'Hollow Slider Bench', video: V.hollowSlider, vol: '20 – 15 – 10 reps (working straight arm pull)', log: [3, 'Set', 'reps'] },
+          { name: 'BMU Negatives', video: V.negatives, vol: '3 reps', between: true, log: [3, 'Set', 'reps'] } ] },
+      { title: 'Day 3', intro: 'Alternate between — 5-4-3-2-1 of each', drills: [
+          { name: 'Overgrip (knuckles to ceiling) Strict CTB Pull-Ups', video: V.strictC2B, vol: '5 – 4 – 3 – 2 – 1 reps', log: [5, 'Set', 'reps'] },
+          { name: 'Get Out of Pool Drill', video: V.pool, vol: '5 – 4 – 3 – 2 – 1 reps', log: [5, 'Set', 'reps'] } ] },
+      { title: 'Day 4 — Attempt It!', tag: 'Final', drills: [
+          { name: '3-Position Swing Drill', video: V.swing3pos, vol: '10 reps', log: [1, 'Total', 'reps'] },
+          { name: 'Full Bar Muscle-Up', video: V.fullBMU, vol: '5 min of attempts', note: "Don't rush to the top — hit each position. Continue to pull down and around the bar as hips rise. Video your attempts to review your technique!", log: [1, 'Made', 'reps'] } ],
+        finisher: { name: 'Face Pulls & Press', video: V.facePulls, vol: '2 min AMRAP', log: [1, 'Total', 'reps'] } } ]
+  ],
+
+  /* ── INTERMEDIATE: same 4 days each week, building volume ── */
+  intermediate: weeks([
+    { title: 'Day 1 — Technique', drills: [
+        { name: '3-Position Swing Drill', video: V.swing3pos, vol: '3 sets × 5 reps', log: [3, 'Set', 'reps'] },
+        { name: 'Bar Muscle-Up Singles', video: V.fullBMU,
+          vol: { 1: 'EMOM 8 min — 1 rep', 2: 'EMOM 10 min — 1 rep', 3: 'EMOM 8 min — 2 singles', 4: 'EMOM 10 min — 2 singles' },
+          note: 'Reset fully between reps — drop off the bar if you need to. Hit every position. Log how many you made.',
+          log: [1, 'Made', 'reps'] } ] },
+    { title: 'Day 2 — Strength', drills: [
+        { name: 'Overgrip Strict Chest-to-Bar Pull-Ups', video: V.strictC2B, vol: { 1: '4 sets × 4 reps', 2: '4 sets × 4 reps', 3: '4 sets × 5 reps', 4: '4 sets × 5 reps' }, log: [4, 'Set', 'reps'] },
+        { name: 'Straight Bar Dips', vol: '4 sets × 8 reps', note: 'Lean over the bar, elbows back, full lockout at the top.', log: [4, 'Set', 'reps'] },
+        { name: 'BMU Negatives', video: V.negatives, vol: '3 sets × 3 reps — 3 sec down', log: [3, 'Set', 'reps'] } ] },
+    { title: 'Day 3 — Linking', drills: [
+        { name: 'Bar Muscle-Up Doubles', video: V.fullBMU, vol: { 1: '5 sets × 2 reps', 2: '5 sets × 2 reps', 3: '6 sets × 2 reps', 4: '6 sets × 2 reps' },
+          note: 'Push away from the bar at the top and keep the swing going into the next rep. If the double breaks, finish with a single.',
+          log: [{ 1: 5, 2: 5, 3: 6, 4: 6 }, 'Set', 'reps'] },
+        { name: 'Get Out of Pool Drill', video: V.pool, vol: '3 sets × 5 reps', log: [3, 'Set', 'reps'] } ] },
+    { title: 'Day 4 — Review', tag: { 1: 'Review', 2: 'Review', 3: 'Review', 4: 'Test' }, drills: [
+        { name: 'Beat Swings', video: V.beatSwing, vol: '3 max effort sets', log: [3, 'Set', 'reps'] },
+        { name: { 1: 'Bar Muscle-Ups for Total', 2: 'Bar Muscle-Ups for Total', 3: 'Bar Muscle-Ups for Total', 4: 'Max Unbroken Bar Muscle-Ups' }, video: V.fullBMU,
+          vol: { 1: 'As many quality reps as possible in 5 min', 2: 'As many quality reps as possible in 5 min', 3: 'As many quality reps as possible in 6 min', 4: '3 attempts — rest 3 min between' },
+          log: [{ 1: 1, 2: 1, 3: 1, 4: 3 }, { 1: 'Total', 2: 'Total', 3: 'Total', 4: 'Set' }, 'reps'] } ],
+      finisher: { name: 'Face Pulls & Press', video: V.facePulls, vol: '2 min AMRAP', log: [1, 'Total', 'reps'] } }
+  ]),
+
+  /* ── RX: same 4 days each week, building volume ── */
+  rx: weeks([
+    { title: 'Day 1 — Unbroken Sets', drills: [
+        { name: 'Bar Muscle-Ups', video: V.fullBMU, vol: { 1: '5 sets × 3 unbroken — rest 90 sec', 2: '5 sets × 4 unbroken — rest 90 sec', 3: '5 sets × 5 unbroken — rest 2 min', 4: '3 sets × 5 unbroken — rest 2 min' },
+          note: 'Same rhythm on every rep. If a set breaks, finish the reps and note where it broke.',
+          log: [{ 1: 5, 2: 5, 3: 5, 4: 3 }, 'Set', 'reps'] },
+        { name: 'Straight Bar Dips', vol: '4 sets × 10 reps', log: [4, 'Set', 'reps'] } ] },
+    { title: 'Day 2 — Strict Strength', drills: [
+        { name: 'Weighted Strict Chest-to-Bar', video: V.strictC2B, vol: '4 sets × 3 reps — heavy but clean', note: 'Log the added weight in kg.', log: [4, 'Set', 'kg'] },
+        { name: 'Strict Bar Muscle-Up Negatives', vol: '4 sets × 2 reps — 5 sec down', note: 'Start at the top of the bar, lower slowly through the transition to a dead hang.', log: [4, 'Set', 'reps'] } ] },
+    { title: 'Day 3 — Under Fatigue', drills: [
+        { name: 'Bar Muscle-Up EMOM', video: V.fullBMU, vol: { 1: 'EMOM 10 min — 2 reps', 2: 'EMOM 10 min — 3 reps', 3: 'EMOM 12 min — 3 reps', 4: 'EMOM 12 min — 4 reps' },
+          note: 'Every minute on the minute. Log your total reps for the EMOM.', log: [1, 'Total', 'reps'] },
+        { name: 'Kipping Chest-to-Bar', video: V.kipC2B, vol: '3 sets × 8 reps', log: [3, 'Set', 'reps'] } ] },
+    { title: 'Day 4 — Review', tag: { 1: 'Review', 2: 'Review', 3: 'Review', 4: 'Test' }, drills: [
+        { name: 'Max Unbroken Bar Muscle-Ups', video: V.fullBMU, vol: '3 sets — rest 3 min between', note: { 4: 'Test week — compare these numbers to Week 1.' }, log: [3, 'Set', 'reps'] },
+        { name: '3-Position Swing Drill', video: V.swing3pos, vol: '3 sets × 5 reps — slow and controlled', log: [3, 'Set', 'reps'] } ],
+      finisher: { name: 'Posterior Shoulder Trio', video: V.facePulls, vol: '2 rounds max reps (RX 5 lb / 2.5 lb)', log: [2, 'Rnd', 'reps'] } }
+  ])
+};
+
+/* Repeat a 4-day template across 4 weeks */
+function weeks(days) { return [1, 2, 3, 4].map(() => days); }
+/* Pick the value for this week when a field differs by week */
+function R(v, w) { return (v && typeof v === 'object' && !Array.isArray(v)) ? (v[w] ?? '') : v; }
+
+/* ═══ STATE (saved on this phone) ═══ */
+const STORE_KEY = 'pmi-bmu-log-v1';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+let state = store.get(STORE_KEY, { level: 'beginner', page: 'overview', log: {}, open: {} });
+if (!LEVELS.some(l => l.id === state.level)) state.level = 'beginner';
+if (!['overview','week1','week2','week3','week4'].includes(state.page)) state.page = 'overview';
+if (!state.log || typeof state.log !== 'object') state.log = {};
+if (!state.open || typeof state.open !== 'object') state.open = {};
+const save = () => store.set(STORE_KEY, state);
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+const bars = n => `<span class="bars" aria-hidden="true">${[1,2,3].map(i => `<i class="${i <= n ? 'on' : ''}"></i>`).join('')}</span>`;
+const level = () => LEVELS.find(l => l.id === state.level);
+const key = (w, d, slot, s) => `${state.level}|w${w}|d${d}|${slot}|${s}`;
+const unitWord = u => u === 'sec' ? 'Seconds' : u === 'kg' ? 'Added kg' : 'Reps';
+
+function warmupHTML(useOv) {
+  return WARMUP.map(x => `<div class="warmup-item"><a class="warmup-link" href="${esc(x.video)}" target="_blank" rel="noopener">${esc(x.name)}</a><span class="warmup-vol">${esc(useOv && x.ovVol ? x.ovVol : x.vol)}</span></div>`).join('');
+}
+
+function logHTML(w, d, slot, drill, prevDrill) {
+  const n = R(drill.log[0], w), label = R(drill.log[1], w), unit = R(drill.log[2], w);
+  const sameAsLastWeek = prevDrill && R(prevDrill.name, w - 1) === R(drill.name, w);
+  let boxes = '';
+  for (let s = 0; s < n; s++) {
+    const v = state.log[key(w, d, slot, s)] ?? '';
+    const prev = sameAsLastWeek ? (state.log[key(w - 1, d, slot, s)] ?? '') : '';
+    const lab = n === 1 ? label : `${label} ${s + 1}`;
+    boxes += `<div class="set"><label for="in-${w}-${d}-${slot}-${s}">${esc(lab)}</label>
+      <input id="in-${w}-${d}-${slot}-${s}" inputmode="decimal" maxlength="5" autocomplete="off"
+        data-key="${key(w, d, slot, s)}" data-count="${w}-${d}" value="${esc(v)}" placeholder="${esc(prev || '–')}"
+        class="${v !== '' ? 'filled' : ''}" aria-label="${esc(lab)} ${unitWord(unit).toLowerCase()}"></div>`;
   }
-  function toggleDay(h) { h.closest('.day-card').classList.toggle('open'); }
+  return `<div class="drill-log">
+    <div class="log-head"><span class="log-key">Log · ${unitWord(unit)}</span>${sameAsLastWeek && w > 1 ? '<span class="log-hint">Faint = last week</span>' : ''}</div>
+    <div class="set-row">${boxes}</div></div>`;
+}
+
+function drillHTML(w, d, slot, drill, prevDrill) {
+  const name = R(drill.name, w), vol = R(drill.vol, w), note = R(drill.note, w);
+  const nameHTML = drill.video
+    ? `<a class="drill-name" href="${esc(drill.video)}" target="_blank" rel="noopener">${esc(name)}</a>`
+    : `<span class="drill-name">${esc(name)}</span>`;
+  const between = drill.between ? `<div class="between-label">${drill.between === true ? 'Between each set ↓' : esc(drill.between)}</div>` : '';
+  return `${between}<div class="drill">
+      <div class="drill-header"><span class="drill-dot"></span>${nameHTML}</div>
+      <div class="drill-vol">${esc(vol)}</div>
+      ${note ? `<div class="drill-note">${esc(note)}</div>` : ''}
+      ${logHTML(w, d, slot, drill, prevDrill)}
+    </div>`;
+}
+
+function renderTop() {
+  const L = level();
+  document.getElementById('levels').innerHTML = LEVELS.map(l =>
+    `<button class="lvl" id="lvl-${l.id}" type="button" data-l="${l.id}" aria-pressed="${l.id === state.level}">${bars(l.bars)}${l.name}</button>`).join('');
+  document.getElementById('hero-desc').innerHTML = L.desc;
+  document.getElementById('goal-pill').textContent = L.goal;
+  document.getElementById('overview-warmup').innerHTML = warmupHTML(true);
+  document.getElementById('placement').innerHTML = LEVELS.map(l =>
+    `<button class="place${l.id === state.level ? ' current' : ''}" id="place-${l.id}" type="button" data-l="${l.id}"><b>${bars(l.bars)}${l.name}</b><span>${l.who} <em>Goal: ${l.goal.toLowerCase()}.</em></span></button>`).join('');
+}
+
+function renderWeeks() {
+  const plan = PROGRAMME[state.level];
+  let html = '';
+  for (let w = 1; w <= 4; w++) {
+    html += `<div id="week${w}" class="page"><div class="section-wrap">
+      <div class="week-header"><span class="week-label">Week ${w}${w === 4 ? ' — Final Push' : ''} · ${esc(level().name)}</span><span class="week-divider"></span></div>`;
+    plan[w - 1].forEach((day, d) => {
+      const prevDay = w > 1 ? plan[w - 2][d] : null;
+      const openKey = `${state.level}w${w}d${d}`;
+      const isOpen = state.open[openKey] ?? (d === 0);
+      const tag = R(day.tag, w);
+      html += `<div class="day-card${isOpen ? ' open' : ''}" data-open="${openKey}">
+        <button class="day-toggle" type="button" aria-expanded="${isOpen}">
+          <div class="day-num">${d + 1}</div>
+          <div class="day-info"><div class="day-sub">Week ${w}</div><div class="day-title">${esc(R(day.title, w))}</div>${tag ? `<span class="day-tag tag-review">${esc(tag)}</span>` : ''}</div>
+          <span class="day-count" id="count-${w}-${d}"></span>
+          <span class="day-chevron">▾</span>
+        </button>
+        <div class="day-body">
+          <div class="warmup-section"><div class="warmup-title">Daily Warmup</div>${warmupHTML(false)}</div>
+          ${R(day.intro, w) ? `<div class="drill-note" style="margin-bottom:14px;margin-left:0">${esc(R(day.intro, w))}</div>` : ''}`;
+      day.drills.forEach((dr, i) => {
+        html += drillHTML(w, d, `m${i}`, dr, prevDay && prevDay.drills[i]);
+      });
+      if (day.finisher) {
+        const f = day.finisher;
+        html += `<div class="finisher-block">
+          <div class="finisher-label">Finisher</div>
+          <div class="finisher-body"><a href="${esc(f.video)}" target="_blank" rel="noopener" class="finisher-link">${esc(f.name)}</a> — ${esc(f.vol)}</div>
+          ${logHTML(w, d, 'fin', f, prevDay && prevDay.finisher)}
+        </div>`;
+      }
+      html += `<textarea class="day-notes" id="notes-${w}-${d}" data-key="${key(w, d, 'x', 'note')}" placeholder="Session notes — how it felt, what to change">${esc(state.log[key(w, d, 'x', 'note')] ?? '')}</textarea>
+        </div></div>`;
+    });
+    html += `</div></div>`;
+  }
+  document.getElementById('weeks').innerHTML = html;
+  for (let w = 1; w <= 4; w++) plan[w - 1].forEach((_, d) => updateCount(w, d));
+}
+
+function updateCount(w, d) {
+  const ins = [...document.querySelectorAll(`input[data-count="${w}-${d}"]`)];
+  const done = ins.filter(i => i.value.trim() !== '').length;
+  const el = document.getElementById(`count-${w}-${d}`);
+  if (!el) return;
+  el.textContent = done === ins.length ? `✓ ${done}/${ins.length}` : `${done}/${ins.length}`;
+  el.classList.toggle('done', done === ins.length);
+}
+
+function showPage(id) {
+  state.page = id; save();
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === id));
+  document.querySelectorAll('.prog-nav a').forEach(a => a.classList.toggle('active', a.dataset.page === id));
+}
+
+function render() { renderTop(); renderWeeks(); showPage(state.page); }
+
+/* ═══ EVENTS ═══ */
+function setLevel(l) { state.level = l; save(); render(); }
+document.getElementById('levels').addEventListener('click', e => {
+  const b = e.target.closest('.lvl'); if (b) setLevel(b.dataset.l);
+});
+document.getElementById('placement').addEventListener('click', e => {
+  const b = e.target.closest('.place'); if (b) setLevel(b.dataset.l);
+});
+document.getElementById('prog-nav').addEventListener('click', e => {
+  const a = e.target.closest('a[data-page]'); if (!a) return;
+  e.preventDefault(); showPage(a.dataset.page); window.scrollTo(0, 0);
+});
+document.getElementById('weeks').addEventListener('click', e => {
+  const t = e.target.closest('.day-toggle'); if (!t) return;
+  const card = t.closest('.day-card');
+  const open = card.classList.toggle('open');
+  t.setAttribute('aria-expanded', String(open));
+  state.open[card.dataset.open] = open; save();
+});
+document.getElementById('weeks').addEventListener('input', e => {
+  const t = e.target; if (!t.dataset.key) return;
+  if (t.tagName === 'INPUT') {
+    t.value = t.value.replace(/[^0-9.]/g, '');
+    t.classList.toggle('filled', t.value !== '');
+  }
+  if (t.value.trim() === '') delete state.log[t.dataset.key];
+  else state.log[t.dataset.key] = t.value;
+  save();
+  if (t.dataset.count) { const [w, d] = t.dataset.count.split('-'); updateCount(+w, +d); }
+});
+const clearBtn = document.getElementById('clear-btn');
+let armTimer;
+clearBtn.addEventListener('click', () => {
+  if (!clearBtn.classList.contains('armed')) {
+    clearBtn.classList.add('armed');
+    clearBtn.textContent = 'Tap again to clear all weeks';
+    armTimer = setTimeout(() => { clearBtn.classList.remove('armed'); clearBtn.textContent = 'Clear my log'; }, 4000);
+    return;
+  }
+  clearTimeout(armTimer);
+  state.log = {}; save(); render();
+  clearBtn.classList.remove('armed'); clearBtn.textContent = 'Log cleared';
+  setTimeout(() => { clearBtn.textContent = 'Clear my log'; }, 2000);
+});
+
+render();
 </script>
 </body>
 </html>
